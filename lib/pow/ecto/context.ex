@@ -214,10 +214,7 @@ defmodule Pow.Ecto.Context do
 
   defp reload_after_write({:error, changeset}, _config), do: {:error, changeset}
   defp reload_after_write({:ok, struct}, config) do
-    # When ecto updates/inserts, has_many :through associations are set to nil.
-    # So we'll just reload when writes happen.
-    struct  = Operations.reload(struct, config) || raise "Record does not exist: #{inspect struct}"
-
+    # @holsee - removing reload after write as per official upcoming 1.0.23
     {:ok, struct}
   end
 
