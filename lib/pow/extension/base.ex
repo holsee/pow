@@ -73,7 +73,11 @@ defmodule Pow.Extension.Base do
         [extension]
         |> Kernel.++(module_list)
         |> Module.concat()
-        |> Code.ensure_compiled?()
+        |> Code.ensure_compiled()
+        |> case do
+          {:module, _} -> true
+          _ -> false
+        end
     end
   end
 
